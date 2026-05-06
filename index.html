@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="ms">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Kalkulator Cashback XM Malaysia | Kira Rebate Forex</title>
+
+<meta name="description" content="Kalkulator cashback XM untuk trader Malaysia. Kira rebate forex, gold (XAUUSD) dan crypto dengan anggaran harian, bulanan dan tahunan.">
+
+<style>
+body {
+  font-family: Arial;
+  background: linear-gradient(180deg,#07152b,#0b1e3a);
+  color: #fff;
+  margin: 0;
+}
+.container {
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+}
+
+/* HERO RESULT */
+.hero {
+  background: #12294d;
+  padding: 30px;
+  border-radius: 16px;
+  text-align: center;
+  border: 1px solid #1f3b6b;
+  margin-bottom: 20px;
+}
+.hero h1 {
+  margin-bottom: 10px;
+}
+.big {
+  font-size: 48px;
+  color: #f5c542;
+  font-weight: bold;
+}
+
+/* GRID */
+.layout {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 20px;
+}
+
+/* INPUT CARD */
+.panel {
+  background: #102447;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #1f3b6b;
+}
+
+label {
+  display: block;
+  margin-top: 10px;
+}
+
+select, input {
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  border-radius: 8px;
+  border: none;
+  background: #0f2342;
+  color: white;
+}
+
+button {
+  width: 100%;
+  padding: 14px;
+  margin-top: 15px;
+  border-radius: 10px;
+  border: none;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.btn-gold {
+  background: #f5c542;
+  color: #000;
+}
+.btn-dark {
+  background: #1f3b6b;
+  color: #fff;
+}
+
+/* STATS */
+.stats {
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: 10px;
+}
+.stat {
+  background: #0f2342;
+  padding: 15px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+/* SEO CARD */
+.article {
+  background: #102447;
+  padding: 20px;
+  border-radius: 14px;
+  border: 1px solid #1f3b6b;
+}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+
+<!-- HERO -->
+<div class="hero">
+<h1>Kalkulator Cashback XM Malaysia</h1>
+<p>Kira rebate forex anda dengan mudah dan dapat sehingga <b>$3000+ setahun</b></p>
+
+<div class="big" id="total">$0</div>
+<p id="perlot"></p>
+
+<div style="margin-top:15px;">
+<a href="https://tradingbygold.com/rebate-xm/calculator" target="_blank">
+<button class="btn-gold">Dapatkan Rebate XM</button>
+</a>
+
+<a href="https://tradingbygold.com/rebate-xm/calculator" target="_blank">
+<button class="btn-dark">Buka Akaun XM</button>
+</a>
+</div>
+</div>
+
+<!-- INPUT -->
+<div class="panel">
+
+<label>Jenis Akaun</label>
+<select id="account" onchange="updatePairs()">
+<option value="standard">Standard</option>
+<option value="ultra">Ultra Low</option>
+<option value="micro">Micro</option>
+</select>
+
+<label>Pair Trading</label>
+<select id="pair"></select>
+
+<label>Saiz Lot</label>
+<input type="number" id="lot" value="1" step="0.01" oninput="hitung()">
+
+<p style="font-size:12px;opacity:0.7;">
+* Akaun Micro: 1 lot = 100 micro lot
+</p>
+
+<button class="btn-gold" onclick="hitung()">Kira Rebate Sekarang</button>
+
+</div>
+
+<!-- STATS -->
+<div class="stats">
+<div class="stat">
+<p>Harian</p>
+<h3 id="daily">$0</h3>
+</div>
+<div class="stat">
+<p>Bulanan</p>
+<h3 id="monthly">$0</h3>
+</div>
+<div class="stat">
+<p>Tahunan</p>
+<h3 id="yearly">$0</h3>
+</div>
+</div>
+
+<!-- ARTICLE -->
+<div class="article">
+
+<h2>Rebate XM untuk Trader Malaysia</h2>
+<p>
+Trader Malaysia menggunakan rebate XM untuk mengurangkan kos trading dan meningkatkan keuntungan. Sistem cashback ini sesuai untuk trader aktif dan juga beginner.
+</p>
+
+<h2>Cara Kira Cashback XM</h2>
+<p>
+Jumlah rebate dikira berdasarkan lot trading dan kadar rebate setiap pair. Gunakan kalkulator ini untuk lihat potensi keuntungan anda.
+</p>
+
+<h2>Kelebihan Rebate Forex</h2>
+<ul>
+<li>Kurangkan kos spread</li>
+<li>Tambah keuntungan trading</li>
+<li>Sesuai untuk semua jenis trader</li>
+</ul>
+
+</div>
+
+</div>
+
+<script>
+const rates = {
+  standard: {
+    EURUSD: 8.1,
+    GBPUSD: 9.0,
+    USDJPY: 8.1,
+    XAUUSD: 15,
+    BTCUSD: 17
+  },
+  ultra: {
+    EURUSD: 3.15,
+    GBPUSD: 3.15,
+    USDJPY: 2.7,
+    XAUUSD: 7.2,
+    BTCUSD: 7.1
+  },
+  micro: {
+    EURUSD: 0.081,
+    GBPUSD: 0.09,
+    USDJPY: 0.081,
+    XAUUSD: 0.15,
+    BTCUSD: 0.17
+  }
+};
+
+function updatePairs(){
+  const acc = document.getElementById("account").value;
+  const pairSelect = document.getElementById("pair");
+  pairSelect.innerHTML = "";
+
+  Object.keys(rates[acc]).forEach(p=>{
+    let opt = document.createElement("option");
+    opt.value = p;
+    opt.textContent = p;
+    pairSelect.appendChild(opt);
+  });
+
+  pairSelect.value = "XAUUSD";
+  hitung();
+}
+
+function hitung(){
+  const acc = document.getElementById("account").value;
+  const pair = document.getElementById("pair").value;
+  const lot = parseFloat(document.getElementById("lot").value)||0;
+
+  let rebate = rates[acc][pair];
+  let total;
+
+  if(acc === "micro"){
+    total = lot * rebate * 100;
+    rebate = rebate * 100;
+  } else {
+    total = lot * rebate;
+  }
+
+  document.getElementById("total").innerHTML = "$" + total.toFixed(2);
+  document.getElementById("perlot").innerHTML = "Rebate per lot: $" + rebate.toFixed(2);
+
+  document.getElementById("daily").innerHTML = "$" + total.toFixed(2);
+  document.getElementById("monthly").innerHTML = "$" + (total*22).toFixed(2);
+  document.getElementById("yearly").innerHTML = "$" + (total*264).toFixed(2);
+}
+
+updatePairs();
+</script>
+
+</body>
+</html>
